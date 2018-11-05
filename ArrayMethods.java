@@ -38,15 +38,15 @@ public class ArrayMethods{
     public static int[] allColSums(int[][] ary){
       int maxSize = 0;
       for (int i = 0; i < ary.length; i++){
-        if (ary[i] >= maxSize){
+        if (ary[i].length >= maxSize){
           maxSize = ary[i].length;
         }
       }
       int sum[] = new int[maxSize];
-      int colSum = 0;
-      for (int i = 0; i < ary.length; i++){
-        for
+      for (int i = 0; i < maxSize; i++){
+        sum[i] = columnSum(ary,i);
       }
+      return sum;
     }
     //Returns an array with the column sum of each column of ary.
     //When a row is not long enough to reach the column count it as a zero. (NO indexOutOfBounds should ever occur)
