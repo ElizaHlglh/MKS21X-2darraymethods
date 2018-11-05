@@ -15,9 +15,9 @@ public class ArrayMethods{
    public static int columnSum(int[][] ary, int x){
      int sum = 0;
      for (int i = 0; i < ary.length; i++){
-       for (int z = 0; z < ary[i].length; z++){
-         if (z == x) sum+=ary[i][z];
-        }
+       if (x < ary[i].length) {
+         sum+=ary[i][x];
+       }
       }
       return sum;
     }
