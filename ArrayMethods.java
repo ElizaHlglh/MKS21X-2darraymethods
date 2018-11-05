@@ -27,7 +27,6 @@ public class ArrayMethods{
    */
    public static int[] allRowSums(int[][] ary){
      int sum[] = new int[ary.length];
-     int rowSum = 0;
      for (int i = 0; i < ary.length; i++){
         sum[i] = rowSum(ary,i);
       }
