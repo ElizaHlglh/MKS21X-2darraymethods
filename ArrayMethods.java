@@ -29,11 +29,7 @@ public class ArrayMethods{
      int sum[] = new int[ary.length];
      int rowSum = 0;
      for (int i = 0; i < ary.length; i++){
-       for (int z = 0; z < ary[i].length; z++){
-         rowSum+=ary[i][z];
-        }
-        sum[i] = rowSum;
-        rowSum=0;
+        sum[i] = rowSum(ary,i);
       }
       return sum;
    }
