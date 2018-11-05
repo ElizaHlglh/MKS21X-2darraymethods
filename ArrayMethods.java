@@ -69,6 +69,12 @@ public class ArrayMethods{
      //checks if the array is row-magic (this means that every row has the same row sum).
 
    public static boolean isColumnMagic(int[][] ary){
+     int sum[] = allColSums(ary);
+     for (int i = 0; i < sum.length-1; i++){
+       if (sum[i] != sum[i+1]){
+         return false;
+       }
+     }
      return true;
    }
     //checks if the array is column-magic (this means that every column has the same column sum).
