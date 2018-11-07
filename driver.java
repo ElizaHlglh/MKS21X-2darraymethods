@@ -1,117 +1,58 @@
-public class driver {
-  public static void printArray1(int[]ary) {
-    String result="{";
-    for (int i = 0; i < ary.length; i++) {
-      result+=ary[i];
-      if (i != ary.length -1) {
-        result+=", ";
-      }
-    }
-    System.out.print(result+"}");
-  }
-  //ob
-  public static void printArray2(int[][]ary) {
-    for (int i = 0; i < ary.length; i++) {
-      printArray1(ary[i]);
-      System.out.println("");
-    }
-  }
-  public static void main(String[] args) {
-    int[][] tester1 = new int[][]{
-      {3,7,8,2,10},
-      {4,6,7,4,9},
-      {5,5,6,6,8},
-      {10,10,5,5,0},
-      {30,0,0,0,0}
-    };
-    int[][] tester2 = new int[][]{
-      {3,4,5,10,30},
-      {7,6,5,10},
-      {8,7,6,5},
-      {2,4,6,5},
-      {10,9,8},
-    };
-    System.out.println();
-    System.out.println(" ---------------------------------");
-    System.out.println("|                                 |");
-    System.out.println("|              START              |");
-    System.out.println("|                                 |");
-    System.out.println(" ---------------------------------");
-    System.out.println("int[][] tester1:");
-    printArray2(tester1);
-    System.out.println();
-    System.out.println("int[][] tester2:");
-    printArray2(tester2);
+import java.util.Arrays;
 
+public class driver {
+  public static void main(String[] args) {
+    int[][] ary = new int[5][5];
+    System.out.println("Empty array should be initialized to 0: " + Arrays.deepToString(ary));
+    System.out.println("Row sum of a new array's row should be 0: " + ArrayMethods.rowSum(ary, 2));
+    for (int i = 0; i < ary[0].length; ++i)
+      ary[0][i] = 5;
+    System.out.println("Row sum of row with five 5s should 25: " + ArrayMethods.rowSum(ary, 0));
     System.out.println();
-    System.out.println("TESTING rowSum");
+
+    //Testing columnSum()
+    ary[0][2] = 4;
+    ary[1][2] = 10;
+    ary[2][2] = -5;
+    ary[3][2] = -15;
+    ary[4][2] = 20;
+    System.out.println("Just to see what's changed: " + Arrays.deepToString(ary));
+    System.out.println("Column sum of column 2 is 4 + 10 - 5 - 15 + 20 is 14: " + ArrayMethods.columnSum(ary, 2));
     System.out.println();
-    System.out.println("ArrayMethods.rowSum(tester2, 0) should return 52");
-    System.out.println(ArrayMethods.rowSum(tester2, 0));
-    System.out.println("ArrayMethods.rowSum(tester2, 1) should return 28");
-    System.out.println(ArrayMethods.rowSum(tester2, 1));
-    System.out.println("ArrayMethods.rowSum(tester2, 2) should return 26");
-    System.out.println(ArrayMethods.rowSum(tester2, 2));
-    System.out.println("ArrayMethods.rowSum(tester2, 3) should return 17");
-    System.out.println(ArrayMethods.rowSum(tester2, 3));
-    System.out.println("ArrayMethods.rowSum(tester2, 4) should return 27");
-    System.out.println(ArrayMethods.rowSum(tester2, 4));
+
+    //Testing allRowSums()
+    System.out.println("As of now, the rowSums should be [24, 10, -5, -15, and 20]: " + Arrays.toString(ArrayMethods.allRowSums(ary)));
+    //Testing allColSums()
+    System.out.println("As of now, the columnSums should be [5, 5, 14, 5, and 5]: " + Arrays.toString(ArrayMethods.allColSums(ary)));
     System.out.println();
+
+    //Testing isRowMagic()
+    System.out.println("Shouldn't be magic yet: " + ArrayMethods.isRowMagic(ary));
+    int[][] ary2 = new int[5][];
+    ary2[0] = new int[]{1, 14};
+    ary2[1] = new int[]{1, 2, 12};
+    ary2[2] = new int[]{1, 2, 3, 4, 5};
+    ary2[3] = new int[]{1, 2, 3, 9};
+    ary2[4] = new int[]{15};
+
+    System.out.println("Let's make a magic-row arr: " + Arrays.deepToString(ary2));
+    System.out.println("Is it magic now? " + ArrayMethods.isRowMagic(ary2));
     System.out.println();
+
+    System.out.println("Just to verify rowSum works with non-rectangular arrays: " + ArrayMethods.rowSum(ary2, 1));
+    System.out.println("Same with columnSum: " + ArrayMethods.columnSum(ary2, 2));
+    System.out.println("Again, just for fun: " + ArrayMethods.columnSum(ary2, 3));
     System.out.println();
-    System.out.println("TESTING columnSum");
-    System.out.println();
-    System.out.println("ArrayMethods.columnSum(tester1, 0) should return 52");
-    System.out.println(ArrayMethods.columnSum(tester1, 0));
-    System.out.println("ArrayMethods.columnSum(tester1, 1) should return 28");
-    System.out.println(ArrayMethods.columnSum(tester1, 1));
-    System.out.println("ArrayMethods.columnSum(tester1, 2) should return 26");
-    System.out.println(ArrayMethods.columnSum(tester1, 2));
-    System.out.println("ArrayMethods.columnSum(tester1, 3) should return 17");
-    System.out.println(ArrayMethods.columnSum(tester1, 3));
-    System.out.println("ArrayMethods.columnSum(tester1, 4) should return 27");
-    System.out.println(ArrayMethods.columnSum(tester1, 4));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println("TESTING allRowSums");
-    System.out.println();
-    System.out.println("ArrayMethods.allRowSums(tester1) should return {30,30,30,30,30}");
-    printArray1(ArrayMethods.allRowSums(tester1));
-    System.out.println("\nArrayMethods.allRowSums(tester2) should return {52,28,26,17,27}");
-    printArray1(ArrayMethods.allRowSums(tester2));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println("TESTING allColSums");
-    System.out.println();
-    System.out.println("ArrayMethods.allColSums(tester1) should return {52,28,26,17,27}");
-    printArray1(ArrayMethods.allColSums(tester1));
-    System.out.println("\nArrayMethods.allColSums(tester2) should return {30,30,30,30,30}");
-    printArray1(ArrayMethods.allColSums(tester2));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println("TESTING isRowMagic");
-    System.out.println();
-    System.out.println("ArrayMethods.isRowMagic(tester1) should return true");
-    System.out.println(ArrayMethods.isRowMagic(tester1));
-    System.out.println("ArrayMethods.isRowMagic(tester2) should return false");
-    System.out.println(ArrayMethods.isRowMagic(tester2));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println("TESTING isColumnMagic");
-    System.out.println();
-    System.out.println("ArrayMethods.isColumnMagic(tester1) should return false");
-    System.out.println(ArrayMethods.isColumnMagic(tester1));
-    System.out.println("ArrayMethods.isColumnMagic(tester2) should return true");
-    System.out.println(ArrayMethods.isColumnMagic(tester2));
-    System.out.println();
-    System.out.println(" ---------------------------------");
-    System.out.println("|                                 |");
-    System.out.println("|             FINISH              |");
-    System.out.println("|                                 |");
-    System.out.println(" ---------------------------------");
+
+    //Testing isColumnMagic()
+    System.out.println("Columns shouldn't be magic yet: " + ArrayMethods.isColumnMagic(ary));
+    int[][] ary3 = new int[4][];
+    ary3[0] = new int[]{1, 2};
+    ary3[1] = new int[]{1, 1, 0};
+    ary3[2] = new int[]{1, 1, 3, 4, 4};
+    ary3[3] = new int[]{1, 0, 1, 0};
+
+    System.out.println("But now it should be, with this array: " + Arrays.deepToString(ary3));
+    System.out.println("Is it magic-column now? " + ArrayMethods.isColumnMagic(ary3));
   }
 }
